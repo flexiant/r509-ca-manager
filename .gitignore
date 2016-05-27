@@ -1,0 +1,9 @@
+.DS_Store
+.yardoc
+coverage
+doc
+*.gem
+log
+.vagrant/**
+ssl-tests/**
+crl-server/binaries/**

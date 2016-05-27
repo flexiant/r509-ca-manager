@@ -1,0 +1,238 @@
+# File modified by Pablo Baños López
+# Copyright 2016 Flexiant Ltd. (for modifications only)
+development:
+  certificate_authorities:
+    development_root_ca:
+      ca_cert:
+        cert: concerto_ca.cer
+        key: concerto_ca.key
+      ocsp_start_skew_seconds: 3600
+      ocsp_validity_hours: 168
+      crl_list_file: concerto_ca_list.txt
+      crl_number_file: concerto_ca_crlnumber.txt
+      crl_validity_hours: 4
+      crl_md: SHA512
+      profiles:
+        server:
+          basic_constraints:
+            :ca: false
+          # authority_info_access:
+          #   :ocsp_location:
+          #   -  :type: URI
+          #      :value: http://ocsp:9291
+          crl_distribution_points:
+            :value:
+            -  :type: URI
+               :value: http://crl:8000/crls/concerto_ca.crl
+          key_usage:
+            :value:
+            - digitalSignature
+            - keyEncipherment
+          extended_key_usage:
+            :value:
+            - serverAuth
+          default_md: SHA512
+          allowed_mds:
+          - SHA256
+          - SHA512
+          subject_item_policy:
+            CN:
+              :policy: required
+            O:
+              :policy: required
+            OU:
+              :policy: optional
+            ST:
+              :policy: required
+            C:
+              :policy: required
+            L:
+              :policy: required
+        ca:
+          basic_constraints:
+            :ca: true
+          crl_distribution_points:
+            :value:
+            -  :type: URI
+               :value: http://ca-manager:8000/crls/concerto_ca.crl
+          key_usage:
+            :value:
+            - digitalSignature
+            - keyEncipherment
+            - keyCertSign
+            - cRLSign
+          default_md: SHA256
+          allowed_mds:
+          - SHA256
+          - SHA512
+          - SHA1
+          subject_item_policy:
+            CN:
+              :policy: required
+            O:
+              :policy: required
+            OU:
+              :policy: optional
+            ST:
+              :policy: required
+            C:
+              :policy: required
+            L:
+              :policy: required
+staging:
+  certificate_authorities:
+    staging_root_ca:
+      ca_cert:
+        cert: concerto_ca.cer
+        key: concerto_ca.key
+      ocsp_start_skew_seconds: 3600
+      ocsp_validity_hours: 168
+      crl_list_file: concerto_ca_list.txt
+      crl_number_file: concerto_ca_crlnumber.txt
+      crl_validity_hours: 25
+      crl_md: SHA512
+      profiles:
+        server:
+          basic_constraints:
+            :ca: false
+          # authority_info_access:
+          #   :ocsp_location:
+          #   -  :type: URI
+          #      :value: http://ocsp:9291
+          crl_distribution_points:
+            :value:
+            -  :type: URI
+               :value: "http://stage-crl.<%=ENV['CONCERTO_DOMAIN']%>/crls/staging_root_ca.crl"
+          key_usage:
+            :value:
+            - digitalSignature
+            - keyEncipherment
+          extended_key_usage:
+            :value:
+            - serverAuth
+          default_md: SHA512
+          allowed_mds:
+          - SHA256
+          - SHA512
+          subject_item_policy:
+            CN:
+              :policy: required
+            O:
+              :policy: required
+            OU:
+              :policy: optional
+            ST:
+              :policy: required
+            C:
+              :policy: required
+            L:
+              :policy: required
+        ca:
+          basic_constraints:
+            :ca: true
+          crl_distribution_points:
+            :value:
+            -  :type: URI
+               :value: "http://stage-crl.<%=ENV['CONCERTO_DOMAIN']%>/crls/staging_root_ca.crl"
+          key_usage:
+            :value:
+            - digitalSignature
+            - keyEncipherment
+            - keyCertSign
+            - cRLSign
+          default_md: SHA256
+          allowed_mds:
+          - SHA256
+          - SHA512
+          - SHA1
+          subject_item_policy:
+            CN:
+              :policy: required
+            O:
+              :policy: required
+            OU:
+              :policy: optional
+            ST:
+              :policy: required
+            C:
+              :policy: required
+            L:
+              :policy: required
+production:
+  certificate_authorities:
+    production_root_ca:
+      ca_cert:
+        cert: concerto_ca.cer
+        key: concerto_ca.key
+      ocsp_start_skew_seconds: 3600
+      ocsp_validity_hours: 168
+      crl_list_file: concerto_ca_list.txt
+      crl_number_file: concerto_ca_crlnumber.txt
+      crl_validity_hours: 25
+      crl_md: SHA512
+      profiles:
+        server:
+          basic_constraints:
+            :ca: false
+          # authority_info_access:
+          #   :ocsp_location:
+          #   -  :type: URI
+          #      :value: http://ocsp:9291
+          crl_distribution_points:
+            :value:
+            -  :type: URI
+               :value: "http://crl.<%=ENV['CONCERTO_DOMAIN']%>/crls/production_root_ca.crl"
+          key_usage:
+            :value:
+            - digitalSignature
+            - keyEncipherment
+          extended_key_usage:
+            :value:
+            - serverAuth
+          default_md: SHA512
+          allowed_mds:
+          - SHA256
+          - SHA512
+          subject_item_policy:
+            CN:
+              :policy: required
+            O:
+              :policy: required
+            OU:
+              :policy: optional
+            ST:
+              :policy: required
+            C:
+              :policy: required
+            L:
+              :policy: required
+        ca:
+          basic_constraints:
+            :ca: true
+          crl_distribution_points:
+            :value:
+            -  :type: URI
+               :value: "http://crl.<%=ENV['CONCERTO_DOMAIN']%>/crls/production_root_ca.crl"
+          key_usage:
+            :value:
+            - digitalSignature
+            - keyEncipherment
+            - keyCertSign
+            - cRLSign
+          default_md: SHA512
+          allowed_mds:
+          - SHA256
+          - SHA512
+          subject_item_policy:
+            CN:
+              :policy: required
+            O:
+              :policy: required
+            OU:
+              :policy: optional
+            ST:
+              :policy: required
+            C:
+              :policy: required
+            L:
+              :policy: required

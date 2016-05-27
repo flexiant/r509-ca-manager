@@ -1,0 +1,27 @@
+development:
+  sessions:
+    default:
+      database: r509-ca-http-dev
+      hosts:
+        - mongo:27017
+production:
+  sessions:
+    default:
+      database: production
+      hosts:
+        <%ENV.select{|k,v| /\ACAMANAGER_DATABASE_NODE_\d+\Z/.match(k)}.values.each do |node|%>
+        - "<%= node%>"
+        <% end %>
+        # - "cbe1.<%=ENV['CONCERTO_DOMAIN']%>:27017"
+        # - "cbe2.<%=ENV['CONCERTO_DOMAIN']%>:27017"
+      username: flexiant
+      password: flexiant
+staging:
+  sessions:
+    default:
+      database: r509-ca-http-staging
+      hosts:
+        # - "db.staging.<%=ENV['CONCERTO_DOMAIN']%>:27017"
+        <%ENV.select{|k,v| /\ACAMANAGER_DATABASE_NODE_\d+\Z/.match(k)}.values.each do |node|%>
+        - "<%= node%>"
+        <% end %>

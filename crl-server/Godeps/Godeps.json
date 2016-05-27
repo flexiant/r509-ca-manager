@@ -1,0 +1,21 @@
+{
+	"ImportPath": "github.com/besol/r509-ca-manager/crl-server",
+	"GoVersion": "go1.5",
+	"Deps": [
+		{
+			"ImportPath": "github.com/Sirupsen/logrus",
+			"Comment": "v0.8.2-23-gc79ccaf",
+			"Rev": "c79ccaf8c2b6e7361c430b45aae6891fca8ff729"
+		},
+		{
+			"ImportPath": "github.com/zenazn/goji",
+			"Comment": "v0.9.0-34-gbf843a1",
+			"Rev": "bf843a174a08e846246b8945f8a9a853d84a256a"
+		},
+		{
+			"ImportPath": "gopkg.in/mgo.v2",
+			"Comment": "r2015.12.06",
+			"Rev": "e30de8ac9ae3b30df7065f766c71f88bba7d4e49"
+		}
+	]
+}
